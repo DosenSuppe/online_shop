@@ -47,8 +47,6 @@ CREATE TABLE IF NOT EXISTS orders (
     PRIMARY KEY (productId, customerId)
 );
 
--- V L A M / View, Library, Action, Model
-
 CREATE TABLE IF NOT EXISTS productComments (
     productId VARCHAR(5) NOT NULL,
     customerId VARCHAR(5) NOT NULL,
