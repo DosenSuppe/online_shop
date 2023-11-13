@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Sample product data (replace with your actual data)
     const products = [
-      { imgSrc: "product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
-      { imgSrc: "product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
-      { imgSrc: "product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
-      { imgSrc: "product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product.jpg", name: "Product 1", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit.", price: "19.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
+      { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
       // Add more products as needed
     ];
   
