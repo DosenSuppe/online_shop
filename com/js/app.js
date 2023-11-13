@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
       { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
       { imgSrc: "src/img/product2.jpg", name: "Product 2", description: "Short description.", price: "24.99€" },
       // Add more products as needed
+      
     ];
   
     const productContainer = document.getElementById("product-container");
