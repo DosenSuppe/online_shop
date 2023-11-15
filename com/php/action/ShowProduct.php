@@ -58,6 +58,15 @@
 
             $productData = sqlLoadData($query)->fetch_assoc();
 
+            $image = sqlLoadData("SELECT * FROM images WHERE productId = \"$productId\";")->fetch_assoc();
+        
+            if ($image == null) {
+                $productThumbnail = "../../../src/img/cart.png";
+            } else {
+                $productThumbnail = "data:image/jpg;charset=utf8;base64,".base64_encode($image['imageData']);
+            }
+        
+
             $productName = $productData["productName"];
             $productDescription = $productData["productDescription"];
             $productPrice = $productData["price"];
@@ -75,7 +84,8 @@
             echo <<<HTML
             <div class="product-container">
                 <div class="product-image">
-                    <img src="../../../src/img/product.jpg">
+                    <!-- img src="../../../src/img/product.jpg" -->
+                    <img src="$productThumbnail">
                 </div>
                 <h1>$productName</h1>
                 <img class="country-icon" src="../../../src/img/$supplierCountry.png"> <h4>$supplierName</h4><br>
@@ -97,8 +107,17 @@
             </div>
             HTML;
 
+
         ?>
     </main>
+
+    <form action="./upload.php" method="post" enctype="multipart/form-data">
+    <label>Select Image File:</label>
+    <input type="file" name="image">
+    <input type="text" name="productId">
+    <input type="text" name="isFront">
+    <input type="submit" name="submit" value="Upload">
+    </form>
 
     <footer>
         <div class="container">

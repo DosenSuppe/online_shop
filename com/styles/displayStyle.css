@@ -33,6 +33,7 @@
 .product-image {
     width: 400px;
     height: 300px;
+    overflow: hidden;
 }
 
 .product-image img {

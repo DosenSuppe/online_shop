@@ -6,11 +6,20 @@
     
     while ($product = $products->fetch_assoc())
     {
+        
+
         $productId = $product["productId"];
         $productName = $product["productName"];
         $productPrice = $product["price"];
-        $productThumbnail = "src/img/product.jpg";
         $productDescription = $product["productDescription"];
+
+        $image = sqlLoadData("SELECT imageData FROM images WHERE productId = '$productId';")->fetch_assoc();
+
+        if ($image == null) {
+            $productThumbnail = "src/img/cart.png";
+        } else {
+            $productThumbnail = "data:image/jpg;charset=utf8;base64,".base64_encode($image['imageData']);
+        }
 
         if (strlen($productDescription) > 150) {
             $productDescription = strtok(wordwrap($productDescription, 150, "...\n"), "\n");
