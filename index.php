@@ -15,7 +15,7 @@
       <br>
       <nav>
         <ul>
-          <li><div><a href="./index.html">Home</a></div></li>
+          <li><div><a href="./index.php">Home</a></div></li>
           <li><div><a href="#">Search</a></div></li>
           <li><div><a href="#">Contact</a></div></li>
         </ul>
@@ -26,12 +26,8 @@
   <main class="container" id="product-container">
     <!-- 
         contains all the products
-        
-        add php in here:
-
-        require_once DisplayProducts.php
-
     -->
+    <?php include("./com/php/site/DisplayProducts.php"); ?>
   </main>
 
   <footer>
@@ -40,6 +36,9 @@
     </div>
   </footer>
 
-  <script src="./com/js/app.js"></script>
+  <!--        !!! IMPORTANT !!! 
+      java script loader is depricated  
+  -->
+  <!-- script src="./com/js/app.js"></script -->
 </body>
 </html>

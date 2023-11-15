@@ -7,6 +7,13 @@ CREATE TABLE IF NOT EXISTS supportedCountries (
     continent VARCHAR(10)
 );
 
+CREATE TABLE IF NOT EXISTS shoppingCart (
+    customerId VARCHAR(5) NOT NULL,
+    productId VARCHAR(5) NOT NULL,
+    amount TINYINT UNSIGNED,
+    PRIMARY KEY (customerId, productId)
+);
+
 CREATE TABLE IF NOT EXISTS customers (
     customerId VARCHAR(5) NOT NULL PRIMARY KEY,
     birthdate DATE,
@@ -15,16 +22,17 @@ CREATE TABLE IF NOT EXISTS customers (
     iban VARCHAR(32),
     email VARCHAR(255),
     phonenumber VARCHAR(24),
-    countryOrigin VARCHAR(3)
+    countryOrigin VARCHAR(3) DEFAULT "US"
 );
 
 CREATE TABLE IF NOT EXISTS products (
     productId VARCHAR(5) NOT NULL,
     supplierId VARCHAR(5) NOT NULL,
     productName VARCHAR(20),
+    price FLOAT(10, 2) DEFAULT 0,
     sale TINYINT UNSIGNED,
     tags TEXT,
-    productDesciption TEXT,
+    productDescription TEXT,
     availableCountry VARCHAR(3),
     PRIMARY KEY (productId, supplierId)
 );
