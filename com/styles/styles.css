@@ -1,3 +1,4 @@
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -7,8 +8,42 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-  
 
+/*
+    user login-info top right
+    displays either logged-in account or "guest"
+*/
+.user-account-div {
+    text-align: center;
+    
+    display: flex;
+
+    /*
+        width has to be edited whenever loading a user's account name
+        if too small, site will fuck up
+        if too big, site will fuck up more
+
+        min. : 90px
+        max. : 150px
+    */
+    width: 90px;
+    
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.user-account-display {
+    box-shadow: 0 4px 10px #133952;
+    color: #20272b;
+    font-weight: bold;
+    border-radius: 5px;
+    height: 20px;
+    width: inherit;
+}
+
+/*
+    title/ navigation bar
+*/
 .container {
     width: 80%;
     margin: 0 auto;
@@ -28,11 +63,15 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
 }
 
 nav ul li {
-    display: inline;
     margin-right: 10px;
+}
+
+nav ul li:last-child {
+    margin-left: auto;
 }
 
 nav div {
@@ -57,7 +96,10 @@ nav div:hover {
     border-radius: 5px;
 }
 
-main {
+/*
+    display layout for the products
+*/
+main.container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -65,9 +107,12 @@ main {
     flex-grow: 1;
 }
 
+/*
+    Box-Design for the products
+*/
 .product {
     width: 300px;
-    margin: 20px 0;
+    margin: 20px 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -134,28 +179,48 @@ main {
     margin-top: 10px;
 }
 
-
+/* button to view more details about the product */
 input[type="submit"] {
     background-color: #27ae60;
     color: #fff;
     padding: 10px;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 80%; /* Adjust as needed was 100% */
 }
 
-.putInCart {
-    background-image: url("../../src/img/cart.png") no-repeat scroll 7px 7px;
+/* this somehow handled the two-buttons-problem with view-product and wishlist-product */
+/* DO NOT EDIT, IT WAS A PAIN TO GET IT RIGHT */
+.button-container {
+    display: flex;
+    justify-content: space-between;
 }
 
-button:hover {
+.wishButton {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+.button-container img {
+    width: 15px; /* Adjust as needed */
+    height: 22px; /* Adjust as needed */
+}
+
+input[type="submit"]:hover {
     background-color: #219d54;
 }
 
+/* foot-note of the website, displays copyright/ contact infos */
 footer {
     background-color: #3498db;
     color: #fff;
     padding: 1rem 0;
     text-align: center;
+}
+
+/* hides everything with this class */
+.hide-this {
+    display: none;
 }
 

@@ -6,7 +6,7 @@
     /**
      * loading data from a table
      */
-    function sqlLoadData($tableName, $sqlQuery) {
+    function sqlLoadData($sqlQuery) {
         $sqlConnection = mysqli_connect("127.0.0.1", "root", "", "shop_project");
 
         $result = mysqli_query($sqlConnection, $sqlQuery);
@@ -19,7 +19,7 @@
     /**
      * saves data to table
      */
-    function sqlSaveData($tableName, $data) {
+    function sqlSaveData($data) {
         $sqlConnection = mysqli_connect("127.0.0.1", "root", "", "shop_project");
 
         
