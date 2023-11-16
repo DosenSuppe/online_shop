@@ -94,15 +94,21 @@
 
             <div class="comment-container">
                 <h1>Käufer Kommentare</h1>
+
                 <ul>
                     <li> 
                         <div>
-                            <h4> Kommentarverfasser </h4>
+                            <h4>Kommentarverfasser</h4>
                             <a>Kommentar Text 1</a> 
                         </div>
-                
                     </li>
-                    <li> <a>Kommentar Text 2</a> </li>
+
+                    <li>
+                        <div>
+                            <h4>Kommentarverfasser</h4>
+                            <a>Kommentar Text 2</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
             HTML;
