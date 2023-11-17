@@ -28,7 +28,7 @@
         echo <<<HTML
         <section class="product">
             <img src="$productThumbnail" alt="$productName">
-            <form action="./com/php/action/ShowProduct.php" method="GET" class="product-info">
+            <form action="./com/php/site/ShowProduct.php" method="GET" class="product-info">
                 <h2>$productName</h2>
                 <input class="hide-this" type="text" name="productId" value="$productId" readonly>
 

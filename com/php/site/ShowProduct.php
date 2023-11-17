@@ -63,7 +63,6 @@
                 $productThumbnail = "data:image/jpg;charset=utf8;base64,".base64_encode($image['imageData']);
             }
         
-
             $productName = $productData["productName"];
             $productDescription = $productData["productDescription"];
             $productPrice = $productData["price"];
@@ -71,55 +70,42 @@
             $supplierName = $productData["supplierName"];
             $supplierCountry = $productData["supplierCountry"];
 
+            // error-condition checking -- product has to have a country linked to it!
             if ($productData["productCountry"] == null) {
                 header("Location: http://localhost/PHP/online_shop/");
                 die();
             }
 
+            // displaying the country
             $countryCode = $productData["productCountry"];
 
             echo <<<HTML
-            <div class="product-container">
-                <div class="product-image">
-                    <!-- img src="../../../src/img/product.jpg" -->
-                    <img src="$productThumbnail">
+                <div class="product-container">
+                    <div class="product-image">
+                        <!-- img src="../../../src/img/product.jpg" -->
+                        <img src="$productThumbnail">
+                    </div>
+                    <h1>$productName</h1>
+                    <img class="country-icon" src="../../../src/img/$supplierCountry.png"> <h4>$supplierName</h4><br>
+                    <a class="product-description">$productDescription</a>
                 </div>
-                <h1>$productName</h1>
-                <img class="country-icon" src="../../../src/img/$supplierCountry.png"> <h4>$supplierName</h4><br>
-                <a class="product-description">$productDescription</a>
-            </div>
-
-            <div class="comment-container">
-                <h1>Käufer Kommentare</h1>
-
-                <ul>
-                    <li> 
-                        <div>
-                            <h4>Kommentarverfasser</h4>
-                            <a>Kommentar Text 1</a> 
-                        </div>
-                    </li>
-
-                    <li>
-                        <div>
-                            <h4>Kommentarverfasser</h4>
-                            <a>Kommentar Text 2</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
             HTML;
+
+            // displaying the product's comments
+            include_once("../action/ShowComments.php");
+
 
 
         ?>
     </main>
 
     <form action="./upload.php" method="post" enctype="multipart/form-data">
-    <label>Select Image File:</label>
-    <input type="file" name="image">
-    <input type="text" name="productId">
-    <input type="text" name="isFront">
-    <input type="submit" name="submit" value="Upload">
+        <label>Select Image File:</label>
+
+        <input type="file" name="image">
+        <input type="text" name="productId">
+        <input type="text" name="isFront">
+        <input type="submit" name="submit" value="Upload">
     </form>
 
     <footer>
