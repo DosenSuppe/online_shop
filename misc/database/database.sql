@@ -7,6 +7,12 @@ CREATE TABLE IF NOT EXISTS supportedCountries (
     continent VARCHAR(10)
 );
 
+CREATE TABLE IF NOT EXISTS images {
+    productId VARCHAR(5) NOT NULL PRIMARY KEY,
+    image LONGBLOB,
+    isThumbnail BOOLEAN
+};
+
 CREATE TABLE IF NOT EXISTS shoppingCart (
     customerId VARCHAR(5) NOT NULL,
     productId VARCHAR(5) NOT NULL,
