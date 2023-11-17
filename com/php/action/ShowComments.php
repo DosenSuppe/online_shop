@@ -2,7 +2,6 @@
 <div class="comment-container">
     <h2>Käufer Kommentare</h2>
 
-
     <?php
         $query = "
             SELECT
@@ -44,18 +43,17 @@
                     <p class="comment-text">$commentText</p>
                 </div>
             HTML;
-
         }
     ?>
-
-    <!-- Add more comments as needed -->
 
     <div class="comment-form">
         <h3>Kommentar hinzufügen</h3>
         
         <form action="comment_submission.php" method="post">
-            <!-- Include input fields for user and comment -->
-            <button type="submit">Kommentar abschicken</button>
+            <input type="text" name="commentText">
+
+            <!-- Include input fields for customer (customerId) and product (productId) -->
+            <input type="submit" value="Kommentar abschicken">
         </form>
     </div>
 </div>

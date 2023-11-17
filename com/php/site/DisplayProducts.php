@@ -6,7 +6,6 @@
     
     while ($product = $products->fetch_assoc())
     {
-        
 
         $productId = $product["productId"];
         $productName = $product["productName"];

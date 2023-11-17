@@ -39,7 +39,7 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2023 Your Shop. All rights reserved.</p>
+      <p>&copy; 2023 Useless-Things. All rights reserved.</p>
     </div>
   </footer>
   
