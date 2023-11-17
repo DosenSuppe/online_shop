@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS supportedCountries (
     countryCode VARCHAR(3) NOT NULL PRIMARY KEY,
     countryName VARCHAR(30),
     continent VARCHAR(10)
-);
+); -- sad
 
 CREATE TABLE IF NOT EXISTS images {
     productId VARCHAR(5) NOT NULL PRIMARY KEY,
