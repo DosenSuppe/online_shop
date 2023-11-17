@@ -10,26 +10,25 @@
 <body>
     <header>
         <div class="container">
-        <h1>Willkommen bei</h1>
-        <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
-        
-        <div class="user-account-div">
-            <a class="user-account-display">Gast</a>
-        </div>
+            <h1>Willkommen bei</h1>
+            <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
+            
+            <div class="user-account-div">
+                <a class="user-account-display">Gast</a>
+            </div>
 
-        <br>
+            <br>
 
-        <nav>
-            <ul>
-            <li><div><a href="../../../index.php">Home</a></div></li>
-            <li><div><a href="#">Search</a></div></li>
-            <li><div><a href="#">Contact</a></div></li>
-            <li><div><a href="#">Log-In</a></div></li>
-            </ul>
-        </nav>
+            <nav>
+                <ul>
+                <li><div><a href="../../../index.php">Home</a></div></li>
+                <li><div><a href="#">Search</a></div></li>
+                <li><div><a href="#">Contact</a></div></li>
+                <li><div><a href="#">Log-In</a></div></li>
+                </ul>
+            </nav>
         </div>
     </header>
-
 
     <main class="product-display">
         <?php 
@@ -52,9 +51,7 @@
 
             WHERE 
                 p.productId = '$productId' AND
-                p.supplierId = s.supplierId;
-        
-                ";
+                p.supplierId = s.supplierId;";
 
             $productData = sqlLoadData($query)->fetch_assoc();
 
