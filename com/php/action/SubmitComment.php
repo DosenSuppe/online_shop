@@ -1,18 +1,22 @@
 <?php
     include_once("../../../library/php/userControl.php");
     include_once("../../../library/php/sqlServer.php");
+    include_once("../../../library/php/generalControl.php");
 
     $currentUser = userGetCurrentUser();
     $productId = $_GET["productId"];
     $userComment = $_GET["commentText"];
 
+    // filtering the words
+    $filteredText = $userComment; // generalFilterString($userComment);
+
     $query = "
         INSERT INTO productcomments (productId, customerId, creationDate, text)
-        VALUES  ('$productId', '$currentUser', CURRENT_TIMESTAMP, '$userComment');
+        VALUES  ('$productId', '$currentUser', CURRENT_TIMESTAMP, '$filteredText');
     ";
 
     sqlSaveData($query);
 
-    header("Location: https://localhost/PHP/online_shop/com/php/site/ShowProduct.php?productId=$productId");
+    header("Location: http://localhost/PHP/online_shop/com/php/site/ShowProduct.php?productId=$productId");
     die();
 ?>

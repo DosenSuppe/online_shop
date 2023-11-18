@@ -138,3 +138,25 @@
     cursor: pointer;
     width: 100%;
 }
+
+/* removing comment */
+.removeComment {
+    margin-top: -20px;
+    text-align: right;
+}
+
+.removeComment input[type="submit"] {
+    background-color: #00000000;
+    color: #000000;
+    font-size: small;
+    width: auto;
+    transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
+}
+
+.removeComment input[type="submit"]:hover {
+    background-color: #19608b79;
+    border-radius: 10px;
+    color: #000000;
+    font-size: small;
+    width: auto;
+}

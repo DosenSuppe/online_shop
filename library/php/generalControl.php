@@ -1,0 +1,7 @@
+<?php
+
+    function generalFilterString($string) {
+        
+    }
+
+?>

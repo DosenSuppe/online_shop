@@ -7,6 +7,7 @@
             SELECT
                 c.creationDate commentDate,
                 c.text commentText,
+                c.customerId customerId,
 
                 u.name customerName,
                 u.surname customerSurname,
@@ -28,6 +29,8 @@
             $commentCreator = $comment["customerName"]." ".$comment["customerSurname"];
             $commentText = $comment["commentText"];
             $commentDate = $comment["commentDate"];
+
+            $customerId = $comment["customerId"];
             $customerCountry = $comment["customerCountry"];
 
             echo <<<HTML
@@ -41,6 +44,13 @@
                     </div>
                     
                     <p class="comment-text">$commentText</p>
+                    <form action="../action/RemoveComment.php" method="POST" class="removeComment">
+                        <input name="productId" type="text" value="$productId" readonly hidden>
+                        <input name="customerId" type="text" value="$customerId" readonly hidden>
+                        <input name="timestamp" type="text" value="$commentDate" readonly hidden>
+
+                        <input type="submit" value="Kommentar löschen">
+                    </form>
                 </div>
             HTML;
         }
