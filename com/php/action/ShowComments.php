@@ -46,15 +46,23 @@
         }
     ?>
 
+    <!-- Adding new comments to a product -->
     <div class="comment-form">
         <h3>Kommentar hinzufügen</h3>
-        
-        <form action="comment_submission.php" method="post">
-            <input type="text" name="commentText">
 
-            <!-- Include input fields for customer (customerId) and product (productId) -->
-            <input type="submit" value="Kommentar abschicken">
-        </form>
+        <?php
+        echo <<<HTML
+            <form action="../action/SubmitComment.php" method="GET">   
+                <input type="text" name="commentText">
+
+                <input type="text" name="productId" value="$productId" readonly hidden>
+
+                <input type="submit" value="Kommentar abschicken">
+            </form>
+        HTML;
+        ?>
+        
+        
     </div>
 </div>
 
