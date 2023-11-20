@@ -3,6 +3,9 @@
     <h2>Käufer Kommentare</h2>
 
     <?php
+        include_once("../../../library/php/userControl.php");
+
+
         $query = "
             SELECT
                 c.creationDate commentDate,
@@ -43,16 +46,25 @@
                         </div>
                     </div>
                     
-                    <p class="comment-text">$commentText</p>
-                    <form action="../action/RemoveComment.php" method="POST" class="removeComment">
-                        <input name="productId" type="text" value="$productId" readonly hidden>
-                        <input name="customerId" type="text" value="$customerId" readonly hidden>
-                        <input name="timestamp" type="text" value="$commentDate" readonly hidden>
-
-                        <input type="submit" value="Kommentar löschen">
-                    </form>
-                </div>
+                    <p class="comment-text">$commentText</p>   
             HTML;
+
+            // checking if the current user is the author
+            // giving them the ability to remove their comments
+            if ($customerId == userGetCurrentUser() || userIsAdmin($customerId) ) {
+                echo <<<HTML
+                    <form action="../action/RemoveComment.php" method="POST" class="removeComment">
+                            <input name="productId" type="text" value="$productId" readonly hidden>
+                            <input name="customerId" type="text" value="$customerId" readonly hidden>
+                            <input name="timestamp" type="text" value="$commentDate" readonly hidden>
+
+                            <input type="submit" value="Kommentar löschen">
+                        </form>
+                    </div>
+                HTML;
+
+            } else // non-authors cannot remove the comment
+                echo "</div>";
         }
     ?>
 

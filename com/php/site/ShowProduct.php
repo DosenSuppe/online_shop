@@ -99,7 +99,7 @@
         ?>
     </main>
 
-    <form action="./upload.php" method="post" enctype="multipart/form-data">
+    <form action="../action/upload.php" method="post" enctype="multipart/form-data">
         <label>Select Image File:</label>
 
         <input type="file" name="image">
