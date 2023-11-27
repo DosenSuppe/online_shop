@@ -24,6 +24,19 @@
                 <li><div><a href="../../../index.php">Home</a></div></li>
                 <li><div><a href="#">Search</a></div></li>
                 <li><div><a href="#">Contact</a></div></li>
+
+                <!-- giving admin-users access to the admin-panel -->
+                <?php 
+                    include_once("../../../library/php/sqlServer.php");
+                    include_once("../../../library/php/userControl.php");
+
+                    if (userIsAdmin(userGetCurrentUser())) {
+                    echo <<<HTML
+                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                    HTML;
+                    }
+                ?>
+
                 <li><div><a href="#">Log-In</a></div></li>
                 </ul>
             </nav>
@@ -55,7 +68,7 @@
 
             $productData = sqlLoadData($query)->fetch_assoc();
 
-            $image = sqlLoadData("SELECT * FROM images WHERE productId = \"$productId\";")->fetch_assoc();
+            $image = sqlLoadData("SELECT * FROM images WHERE productId = '$productId';")->fetch_assoc();
         
             if ($image == null) {
                 $productThumbnail = "../../../src/img/cart.png";

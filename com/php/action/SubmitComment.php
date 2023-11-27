@@ -5,8 +5,15 @@
 
     $currentUser = userGetCurrentUser();
     $productId = $_GET["productId"];
-    $userComment = $_GET["commentText"];
 
+    // checking if the user is blocked
+    // if blocked, the user is not allowed to submit comments
+    if (userIsBlocked()) {
+        header("Location: http://localhost/PHP/online_shop/com/php/site/ShowProduct.php?productId=$productId");
+        die();
+    }
+
+    $userComment = $_GET["commentText"];
     // filtering the words
     $filteredText = $userComment; // generalFilterString($userComment);
 

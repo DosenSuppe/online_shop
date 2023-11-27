@@ -24,6 +24,19 @@
                 <li><div><a href="../../../index.php">Home</a></div></li>
                 <li><div><a href="#">Search</a></div></li>
                 <li><div><a href="#">Contact</a></div></li>
+
+                <!-- giving admin-users access to the admin-panel -->
+                <?php 
+                    include_once("../../../library/php/sqlServer.php");
+                    include_once("../../../library/php/userControl.php");
+
+                    if (userIsAdmin(userGetCurrentUser())) {
+                    echo <<<HTML
+                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                    HTML;
+                    }
+                ?>
+
                 <li><div><a href="#">Log-In</a></div></li>
                 </ul>
             </nav>
@@ -32,16 +45,20 @@
 
     <main class="product-display">
     <div class="product">
-            <form action="AdminB_block.php" method="POST">
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="block" readonly hidden>
+
                 <h1 class="TextMiddle">Benutzer sperren</h1><br>
-                <div class="FieldMiddle"><input type="text" id="blockUser" name="blockUser" placeholder="Benutzername" required></div>
+                <div class="FieldMiddle"><input type="text" name="userId" placeholder="Benutzer-Id" required></div>
                 <div class="inputBox"><br><br><br>
                   <input class="button" type="submit" name="" value="Submit">
                 </div>
             </form>
-            <form action="AdminB_unblock.php" method="POST">
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="unblock" readonly hidden>
+                
                 <h1 class="TextMiddle">Sperrung aufheben</h1><br>
-                <div class="FieldMiddle"><input type="text" id="unblockUser" name="unblockUser" placeholder="Benutzername" required></div>
+                <div class="FieldMiddle"><input type="text" name="userId" placeholder="Benutzer-Id" required></div>
                 <div class="inputBox"><br><br><br>
                   <input class="button" type="submit" name="" value="Submit">
                 </div>

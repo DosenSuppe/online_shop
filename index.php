@@ -32,7 +32,7 @@
 
             if (userIsAdmin(userGetCurrentUser())) {
               echo <<<HTML
-                <li><div><a href="#">Admin</a></div></li>
+                <li><div><a href="./com/php/site/AdminInterface.php">Admin</a></div></li>
               HTML;
             }
           ?>

@@ -35,7 +35,9 @@ CREATE TABLE `customers` (
   `iban` varchar(32) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phonenumber` varchar(24) DEFAULT NULL,
-  `countryOrigin` varchar(5) DEFAULT NULL
+  `countryOrigin` varchar(5) DEFAULT NULL,
+  `isAdmin` tinyint(1) DEFAULT 0,
+  `isBlocked` tinyint(1) DEFAULT 0,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
