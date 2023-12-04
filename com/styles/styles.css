@@ -208,7 +208,7 @@ main.container {
     height: 22px; /* Adjust as needed */
 }
 
-input[type="submit"]:hover {
+.displayProduct:hover {
     background-color: #219d54;
 }
 
