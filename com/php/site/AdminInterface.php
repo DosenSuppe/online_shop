@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/styles.css">
-    <link rel="stylesheet" href="../../styles/displayStyle.css">
+    <link rel="stylesheet" href="../../styles/adminStyle.css">
     <title>Useless-Things.com</title>
 </head>
 <body>
@@ -43,8 +43,8 @@
         </div>
     </header>
 
-    <main class="product-display">
-    <div class="product">
+    <main class="card-display">
+    <div class="card">
             <form action="../action/AdminActions.php" method="POST">
                 <input name="action" value="block" readonly hidden>
 
