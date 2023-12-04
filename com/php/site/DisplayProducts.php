@@ -37,7 +37,8 @@
                         <span>€</span>
                     </div>
                     <div class="button-container">
-                        <input type="submit" value="Produkt anzeigen">
+                        <input class="displayProduct" type="submit" value="Produkt anzeigen">
+
                         <button onClick="addWishlist('$productId');" type="button" class="wishButton">
                             <img id="wish-for-$productId" src="src/img/wish_no.png">
                         </button>

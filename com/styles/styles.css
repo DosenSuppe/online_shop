@@ -181,7 +181,7 @@ main.container {
 }
 
 /* button to view more details about the product */
-input[type="submit"] {
+.displayProduct {
     background-color: #27ae60;
     color: #fff;
     padding: 10px;
