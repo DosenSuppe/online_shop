@@ -6,7 +6,8 @@
     cursor: pointer;
     width: 80%; /* Adjust as needed was 100% */
 }
-.card {
+
+.card { 
     width: 300px;
     margin: 20px 20px;
     border: 1px solid #ddd;
