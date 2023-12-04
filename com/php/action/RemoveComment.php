@@ -18,5 +18,4 @@
 
     header("Location: http://localhost/PHP/online_shop/com/php/site/ShowProduct.php?productId=$productId");
     die();
-
 ?>
