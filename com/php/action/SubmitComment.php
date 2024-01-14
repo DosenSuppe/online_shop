@@ -17,13 +17,15 @@
     // filtering the words
     $filteredText = $userComment; // generalFilterString($userComment);
 
-    $query = "
-        INSERT INTO productcomments (productId, customerId, creationDate, text)
-        VALUES  ('$productId', '$currentUser', CURRENT_TIMESTAMP, '$filteredText');
-    ";
+    if (strlen($filteredText) > 0) {
+        $query = "
+            INSERT INTO productcomments (productId, customerId, creationDate, text)
+            VALUES  ('$productId', '$currentUser', CURRENT_TIMESTAMP, '$filteredText');
+        ";
 
-    sqlSaveData($query);
-
+        sqlSaveData($query);
+    }
+    
     header("Location: http://localhost/PHP/online_shop/com/php/site/ShowProduct.php?productId=$productId");
     die();
 ?>

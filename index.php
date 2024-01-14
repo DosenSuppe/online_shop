@@ -24,6 +24,18 @@
           <li><div><a href="./index.php">Home</a></div></li>
           <li><div><a href="#">Search</a></div></li>
           <li><div><a href="#">Contact</a></div></li>
+
+          <!-- giving suppliers access to the supplier interface -->
+          <?php 
+            include_once("./library/php/sqlServer.php");
+            include_once("./library/php/userControl.php");
+
+            if (userIsSupplier(userGetCurrentUser())) {
+              echo <<<HTML
+                <li><div><a href="./com/php/site/SupplierInterface.php">Supplies</a></div></li>
+              HTML;
+            }
+          ?>
           
           <!-- giving admin-users access to the admin-panel -->
           <?php 

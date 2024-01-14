@@ -18,10 +18,11 @@
     flex-direction: column;
     height: 500px; /* Set a fixed height for the product container */
 }
+
 .card-display {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-top: -40px;
+    margin-top: 0px;
     flex-grow: 1;
 }

@@ -31,9 +31,9 @@
                     include_once("../../../library/php/userControl.php");
 
                     if (userIsAdmin(userGetCurrentUser())) {
-                    echo <<<HTML
-                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
-                    HTML;
+                        echo <<<HTML
+                            <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                        HTML;
                     }
                 ?>
 

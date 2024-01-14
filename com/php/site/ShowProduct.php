@@ -56,15 +56,14 @@
                     p.availableCountry productCountry,
 
                     s.name supplierName,
-                    s.country supplierCountry
+                    s.countryOrigin supplierCountry
             
             FROM 
                 products p, 
-                suppliers s
+                users s
 
             WHERE 
-                p.productId = '$productId' AND
-                p.supplierId = s.supplierId;";
+                p.productId = '$productId'";
 
             $productData = sqlLoadData($query)->fetch_assoc();
 
@@ -106,8 +105,6 @@
 
             // displaying the product's comments
             include_once("../action/ShowComments.php");
-
-
 
         ?>
     </main>

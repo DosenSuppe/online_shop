@@ -1,9 +1,11 @@
 <?php
+    $user_currentUser = null;
+    
     /**
-     * returns the customerId for the current logged-in user
+     * returns the userId for the current logged-in user
      */
     function userGetCurrentUser() {
-        return "C0001";
+        return $user_currentUser;
     }
 
     /**
@@ -20,7 +22,7 @@
     function userIsBlocked() {
         $currentUser = userGetCurrentUser();
         $result = sqlExecute("
-            SELECT isBlocked FROM customers WHERE customerId = '$currentUser'
+            SELECT isBlocked FROM users WHERE userId = '$currentUser'
         ")->fetch_assoc();
 
         return ($result["isBlocked"] == 1) ? true : false; 
@@ -29,42 +31,94 @@
     /**
      * userIsLoggedIn 
      * 
-     * checks if there the client is logged into a user-account
+     * checks if the client is logged into a user-account
      * 
      * outputs:
      *  is logged in     -> true
      *  is not logged in -> false
      * 
-     * requires: library/php/sqlServer.php
      */
     function userIsLoggedIn() {
+        return ($user_currentUser == null) ? false : true;
+    }
 
+    /**
+     * userIsSupplier
+     * 
+     * $userId -> supplierId
+     * 
+     * checks if the client is logged into a supplier-account
+     * 
+     * outputs:
+     *  supplier        -> true
+     *  non-supplier    -> false
+     * 
+     * requires: library/php/sqlServer.php:sqlExecute
+     */
+    function userIsSupplier($userId) {
+        $isSupplier = sqlExecute("
+            SELECT 
+                isAdmin isAdmin
+            FROM
+                users
+            WHERE 
+            userId = '$userId';
+        ")->fetch_assoc();
+
+        return $isSupplier == 0 ? false : true;
     }
 
     /**
      * userIsAdmin
      * 
-     * $userId -> customerId
+     * $userId -> userId
      * 
-     * Checks if the user is an admin.
+     * checks if the user is an admin.
      * 
      * outputs:
      *  admin     -> true
      *  non-admin -> false
      * 
-     * requires: library/php/sqlServer.php
+     * requires: library/php/sqlServer.php:sqlExecute
      */
     function userIsAdmin($userId) {
         $isAdmin = sqlExecute("
             SELECT 
                 isAdmin isAdmin
             FROM
-                customers
+                users
             WHERE 
-                customerId = '$userId';
+            userId = '$userId';
         ")->fetch_assoc();
 
-        return $isAdmin == 0 ? false : true;
+        return $isAdmin == 1 ? true : false;
     }
 
+    /**
+     * userLogIn
+     * 
+     * $userEmail -> the user's email
+     * $userPassw -> the user's password
+     * 
+     * tries to log in a user with given parameters
+     * 
+     * outputs: 
+     *  login-success -> true
+     *  login-failed -> false
+     * 
+     * requires: library/php/sqlServer.php:sqlExecute
+     */
+    function userLogin($userEmail, $userPassw) {
+        $userData = sqlExecute("
+            SELECT 
+            
+            FROM
+
+            WHERE
+        ");
+
+        // gotta check if there is acutally data for the given credentials
+
+
+    }
 ?>

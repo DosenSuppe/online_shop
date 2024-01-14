@@ -3,14 +3,14 @@
     include_once("../../../library/php/sqlServer.php");
 
     $productId = $_POST["productId"];
-    $customerId = $_POST["customerId"];
+    $user = $_POST["userId"];
     $timestamp = $_POST["timestamp"];
 
     $query = "
         DELETE FROM productcomments
         WHERE
             productId = '$productId'    AND
-            customerId = '$customerId'  AND
+            customerId = '$user'  AND
             creationDate = '$timestamp'
     ";
 

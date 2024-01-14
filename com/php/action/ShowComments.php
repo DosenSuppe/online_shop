@@ -17,7 +17,7 @@
                 u.countryOrigin customerCountry
 
             FROM
-                customers u,
+                users u,
                 productcomments c
 
             WHERE
@@ -33,7 +33,7 @@
             $commentText = $comment["commentText"];
             $commentDate = $comment["commentDate"];
 
-            $customerId = $comment["customerId"];
+            $userId = $comment["customerId"];
             $customerCountry = $comment["customerCountry"];
 
             echo <<<HTML
@@ -51,11 +51,11 @@
 
             // checking if the current user is the author
             // giving them the ability to remove their comments
-            if ($customerId == userGetCurrentUser() || userIsAdmin($customerId) ) {
+            if ($userId == userGetCurrentUser() || userIsAdmin($userId) ) {
                 echo <<<HTML
                     <form action="../action/RemoveComment.php" method="POST" class="removeComment">
                             <input name="productId" type="text" value="$productId" readonly hidden>
-                            <input name="customerId" type="text" value="$customerId" readonly hidden>
+                            <input name="userId" type="text" value="$userId" readonly hidden>
                             <input name="timestamp" type="text" value="$commentDate" readonly hidden>
 
                             <input type="submit" value="Kommentar löschen">
@@ -79,7 +79,7 @@
 
                 <input type="text" name="productId" value="$productId" readonly hidden>
 
-                <input type="submit" value="Kommentar abschicken">
+                <input class="submitComment" type="submit" value="Kommentar abschicken">
             </form>
         HTML;
         ?>

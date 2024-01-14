@@ -15,7 +15,7 @@
          */
         case 'block':
             sqlExecute("
-                UPDATE customers
+                UPDATE users
                 SET isBlocked = 1
                 WHERE customerId = '$userId';
             ");
@@ -30,7 +30,7 @@
          */
         case 'unblock':
             sqlExecute("
-                UPDATE customers
+                UPDATE users
                 SET isBlocked = 0
                 WHERE customerId = '$userId';
             ");
@@ -42,6 +42,7 @@
             break;
     }
 
+    // redirect to previous site
     $preSite = $_SERVER['HTTP_REFERER'];
     header("Location: $preSite");
 ?>

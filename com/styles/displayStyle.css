@@ -150,13 +150,25 @@
     color: #000000;
     font-size: small;
     width: auto;
+    border-style: hidden;
     transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
 }
 
 .removeComment input[type="submit"]:hover {
-    background-color: #19608b79;
-    border-radius: 10px;
+    background-color: #c02b2b9e;
+    border-radius: 5px;
     color: #000000;
     font-size: small;
     width: auto;
+}
+
+.submitComment {
+    background: #36d678;
+    border-radius: 5px;
+    border-style: hidden;
+}
+
+.submitComment:hover {
+    background: #2fbc6a;
+    border-radius: 5px;
 }
