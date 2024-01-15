@@ -10,7 +10,7 @@
             SELECT
                 c.creationDate commentDate,
                 c.text commentText,
-                c.customerId customerId,
+                c.userId userId,
 
                 u.name customerName,
                 u.surname customerSurname,
@@ -21,7 +21,7 @@
                 productcomments c
 
             WHERE
-                c.customerId = u.customerId     AND
+                c.userId = u.userId     AND
                 c.productId = '$productId';
         ";
 
@@ -33,7 +33,7 @@
             $commentText = $comment["commentText"];
             $commentDate = $comment["commentDate"];
 
-            $userId = $comment["customerId"];
+            $userId = $comment["userId"];
             $customerCountry = $comment["customerCountry"];
 
             echo <<<HTML

@@ -49,7 +49,7 @@
             }
           ?>
 
-          <li><div><a href="#">Log-In</a></div></li>
+          <li><div><a href="./com/php/site/SignUpLogIn.php">Log-In</a></div></li>
         </ul>
       </nav>
     </div>

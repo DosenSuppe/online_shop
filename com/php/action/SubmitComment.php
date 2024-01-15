@@ -19,7 +19,7 @@
 
     if (strlen($filteredText) > 0) {
         $query = "
-            INSERT INTO productcomments (productId, customerId, creationDate, text)
+            INSERT INTO productcomments (productId, userId, creationDate, text)
             VALUES  ('$productId', '$currentUser', CURRENT_TIMESTAMP, '$filteredText');
         ";
 

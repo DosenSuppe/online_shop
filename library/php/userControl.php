@@ -1,11 +1,16 @@
 <?php
-    $user_currentUser = null;
+
+    // why the fuck is this not defining the variable?????
+    $user_currentUser = null; 
     
     /**
      * returns the userId for the current logged-in user
      */
     function userGetCurrentUser() {
-        return $user_currentUser;
+        if (isset($user_currentUser)) {
+            return $user_currentUser;
+        }
+        return null;
     }
 
     /**
@@ -103,22 +108,48 @@
      * tries to log in a user with given parameters
      * 
      * outputs: 
-     *  login-success -> true
-     *  login-failed -> false
+     *  login-success -> userId: string
+     *  login-failed -> false: boolean
      * 
      * requires: library/php/sqlServer.php:sqlExecute
      */
     function userLogin($userEmail, $userPassw) {
-        $userData = sqlExecute("
+        
+        $userData = sqlExecute(" 
             SELECT 
-            
+                userId      userId,
+                email       userEmail,
+                password    userPassw,
+                salt        userSalt
             FROM
-
+                users
             WHERE
-        ");
+                email = '$userEmail';
+        ")->fetch_assoc();
 
         // gotta check if there is acutally data for the given credentials
+        if ($userData == null) return false;
+        
+        $storedPassw = $userData["userPassw"];
+        $storedSalt = $userData["userSalt"];
+        $userId = $userData["userId"];
 
+        $loginSuccess = password_verify($userPassw.$storedSalt, $storedPassw);
 
+        if (!$loginSuccess) return false; 
+
+        // checking for a re-hash
+        if (password_needs_rehash($storedPassw, PASSWORD_DEFAULT)) {
+            $rehashedPassw = password_hash($userPassw.$storedSalt, PASSWORD_DEFAULT);
+            
+            // updating the new password
+            sqlExecute("
+                UPDATE users 
+                SET password = '$rehashedPassw' 
+                WHERE email = '$userEmail';
+            ");
+        }
+        
+        return $userId;
     }
 ?>

@@ -10,7 +10,7 @@
         DELETE FROM productcomments
         WHERE
             productId = '$productId'    AND
-            customerId = '$user'  AND
+            userId = '$user'  AND
             creationDate = '$timestamp'
     ";
 

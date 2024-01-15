@@ -17,7 +17,7 @@
             sqlExecute("
                 UPDATE users
                 SET isBlocked = 1
-                WHERE customerId = '$userId';
+                WHERE userId = '$userId';
             ");
 
             break;
@@ -32,7 +32,7 @@
             sqlExecute("
                 UPDATE users
                 SET isBlocked = 0
-                WHERE customerId = '$userId';
+                WHERE userId = '$userId';
             ");
 
             break;
