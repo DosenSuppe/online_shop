@@ -2,9 +2,51 @@
 
     // why the fuck is this not defining the variable?????
     $user_currentUser = null; 
-    
+
     /**
+     * createVerificationToken
+     * 
+     * generates an returns a verification code for email verification
+     * 
+     * output:
+     *  verificationCode -> string
+     */
+    function createVerificationToken() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    /**
+     * createSaltToken
+     * 
+     * generates an returns a verification code for email verification
+     * 
+     * output:
+     *  verificationCode -> string
+     */
+    function createVerificationToken() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?!*#\´`/%&=}[]{$';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    /**
+     * userGetCurrentUser
+     * 
      * returns the userId for the current logged-in user
+     * 
+     * outputs:
+     *  user    -> userId: string
+     *  no user -> null
      */
     function userGetCurrentUser() {
         if (isset($user_currentUser)) {

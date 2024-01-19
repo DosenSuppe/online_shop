@@ -82,7 +82,6 @@
                 
                 <button class="changeField" id="toLogin">Already have an account?</button>
             </form>
-   
         </div>
     </div>
 
