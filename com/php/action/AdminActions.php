@@ -37,6 +37,14 @@
 
             break;
 
+        case 'deleteUser':
+
+            break;
+
+        case 'deleteProduct':
+
+            break;
+            
         default:
             // something went wrong...
             break;

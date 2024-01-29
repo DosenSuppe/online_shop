@@ -18,7 +18,14 @@
         for ($i = 0; $i < 10; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        return $randomString;
+
+        // checking if that code already exists
+        $codeExists = sqlExecute("
+            SELECT verificationCode code FROM verifications WHERE verificationCode = '$randomString';
+        ")->fetch_assoc();
+
+        // if the code has already been created, create a new code
+        return $codeExists == null ? $randomString : createVerificationToken();
     }
 
     /**
@@ -29,7 +36,7 @@
      * output:
      *  verificationCode -> string
      */
-    function createVerificationToken() {
+    function createSaltToken() {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?!*#\´`/%&=}[]{$';
         $charactersLength = strlen($characters);
         $randomString = '';

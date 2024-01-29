@@ -1,20 +1,46 @@
 <?php
     if ($_SERVER["REQUEST_METHOD"] != "POST") return;
 
+    include_once("../../../library/php/userControl.php");
+    include_once("../../../library/php/sqlServer.php");
+
     // verifying the email verification code
     if (isset($_POST["verificationCodeVerify"])) {
         
         if ($_POST["verificationCodeVerify"] == $_POST["verificationCode"]) {
-            // updating the email in the database to "verified"
-            echo <<<HTML
-                <script>alert("You have been registered!") </script>
-            HTML;
+            // removing the getting the data and removing the verification code from the database
             
-            $email = $_POST["email"];
-            
+            $verificationCode = $_POST["verificationCode"];
 
-            header("Location: http://localhost/PHP/online_shop/index.php");
-            die();
+            $data = sqlExecute("
+                SELECT email email, password password, name name, surname surname, birthdate birthdate 
+                FROM verifications 
+                WHERE verificationCode = '$verificationCode';")->fetch_assoc();
+
+            sqlExecute("DELETE FROM verifications WHERE verificationCode = 'verificationCode' ");
+
+            $email = $data["email"];
+            $password = $data["password"];
+            $name = $data["name"];
+            $surname = $data["surname"];
+            $birthdate = $data["birthdate"];
+            
+            $userId = sqlCreateUser($name, $surname, $email, $password, $birthdate);
+
+            // account already exists
+            if ($userId == 2) {
+
+            // internal server error
+            } else if ($userId == 3) {
+
+            // account has been craeted
+            } else {
+
+            }
+
+            echo $userId;
+            // header("Location: http://localhost/PHP/online_shop/index.php");
+            exit();
 
         } else {
             // email failed to be verified
@@ -26,8 +52,13 @@
             die();
         }
     }
-    include_once("../../../library/php/userControl.php");
 
+    // all user-given inputs
+    $name = $_POST["name"];
+    $surname = $_POST["surname"];
+    $birthdate = $_POST["birthdate"];
+    $password = $_POST["password"];
+    
     // registering new email
     $email = $_POST["email"];
 
@@ -86,7 +117,7 @@
         <body>
             <div class="email-container">
                 <h2>Email Verification</h2>
-                <p>Dear User,</p>
+                <p>Dear $name,</p>
                 <p>Thank you for registering! To complete your registration, please click the button below to verify your email:</p>
                 <a class="verification-button">Verifcation Code: $verificationCode</a>
                 <p>If you didn't register on our site, you can ignore this email.</p>
@@ -104,6 +135,7 @@
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= 'From: UseLessThings.com <originniklas2017@gmail.com>' . "\r\n";
 
+    // sending mail to the user
     $response = mail($email, $subject, $message, $headers);
     
     if ($response) {
@@ -135,8 +167,6 @@
                             <form action="../action/SignUp.php" method="POST">
                                 <input type="text" name="verificationCode" placeholder="Verification Code" required>
                                 <input type="text" name="verificationCodeVerify" value="$verificationCode" hidden>
-                                <input type="email" name="email" value="$email" hidden>
-                                <input type="text" name="name" value="$name" hidden>
                                 
                                 <button type="submit">Verify</button>
                                 
@@ -148,6 +178,19 @@
             </body>
             </html>
         HTML;
+
+        // check for outdated verification Codes (codes older than 15min)
+        sqlExecute("
+            DELETE FROM verifications WHERE creationTimeStamp + 15 * 60 < UNIX_TIMESTAMP();
+        ");
+
+        // save info the database 
+        $creationTimeStamp = strtotime("now");
+        sqlExecute("
+            INSERT INTO verifications (verificationCode, creationTimeStamp, email, name, surname, password, birthdate)
+            VALUES ('$verificationCode', '$creationTimeStamp', '$email', '$name', '$surname', '$password', '$birthdate');
+        ");
+
     } else {
         // email could not be send
         include("./SignUp.php");

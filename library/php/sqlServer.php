@@ -32,31 +32,30 @@
      *  verified    -> Whether the user is verified or not
      * 
      * outputs:
-     *  1   -> user has been created
+     *  Id  -> user has been created
      *  2   -> user already exists
      *  3   -> unable to create user (internal server error)
      */
-    function sqlCreateUser( $name, $surname, $email, $password, $birthdate, $phonenumber, $verified) {
+    function sqlCreateUser( $name, $surname, $email, $password, $birthdate) {
         // checking if the email is already in use
-        $alreadyExists = sqlExecute("SELECT email FROM users WHERE email = '$email'; ");
+        $alreadyExists = sqlExecute("SELECT email FROM users WHERE email = '$email'; ")->fetch_assoc();
         
         if ($alreadyExists) return 2;
-
+        $userCount = sqlExecute("SELECT Count(email) userCount FROM users;")->fetch_assoc()["userCount"];
+        
         // hashing the password
-        $passwordSalt = createSalt();
+        $passwordSalt = createSaltToken();
         $hashedPassword = password_hash($password.$passwordSalt, PASSWORD_DEFAULT);
 
+        $newUserId = "C" . $userCount + 1;
         // saving the new user to the database
         $creationResponse = sqlExecute("
-            INSERT INTO users (name, surname, email, password, birthdate, phonenumber, verified)
-            VALUES ('$name', '$surname', '$email', '$hashedPassword', '$phonenumber', '$verified');
+            INSERT INTO users (userId, name, surname, email, password, birthdate)
+            VALUES ('$newUserId', '$name', '$surname', '$email', '$hashedPassword', 'birhtdate');
         ");
 
-        // user has been created
-        if ($creationResponse) return 1;
-
-        // internal server error (sql unexpected - expected)
-        return 3;
+        // checking user has been created and returning the ID, else return internal error
+        return $creationResponse? $creationResponse : 3;
     }
 
     /**
