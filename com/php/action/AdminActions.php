@@ -5,7 +5,7 @@
     include_once("../../../library/php/sqlServer.php");
 
     $action = $_POST["action"];
-    $referralId = $_POST["userId"];
+    $referralId = $_POST["referralId"];
 
     switch ($action) {
         /**

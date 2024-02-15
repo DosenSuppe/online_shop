@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/displayStyle.css">
     <link rel="stylesheet" href="../../styles/adminStyle.css">
     <title>Useless-Things.com</title>
 </head>
@@ -31,9 +32,9 @@
                     include_once("../../../library/php/userControl.php");
 
                     if (userIsAdmin(userGetCurrentUser())) {
-                        echo <<<HTML
-                            <li><div><a href="./AdminInterface.php">Admin</a></div></li>
-                        HTML;
+                    echo <<<HTML
+                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                    HTML;
                     }
                 ?>
 
@@ -49,7 +50,7 @@
                 <input name="action" value="block" readonly hidden>
 
                 <h1 class="TextMiddle">Benutzer sperren</h1><br>
-                <div class="FieldMiddle"><input type="text" name="userId" placeholder="Benutzer-Id" required></div>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
                 <div class="inputBox"><br><br><br>
                   <input class="button" type="submit" name="" value="Submit">
                 </div>
@@ -58,7 +59,7 @@
                 <input name="action" value="unblock" readonly hidden>
                 
                 <h1 class="TextMiddle">Sperrung aufheben</h1><br>
-                <div class="FieldMiddle"><input type="text" name="userId" placeholder="Benutzer-Id" required></div>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
                 <div class="inputBox"><br><br><br>
                   <input class="button" type="submit" name="" value="Submit">
                 </div>
@@ -66,28 +67,29 @@
         </div>
 
         <div class="product">
-            <form action="AdminB.php" method="POST">
-                <h1 class="TextMiddle">Hersteller sperren</h1><br>
-                <div class="FieldMiddle"><input type="text" id="blockUser" name="blockUser" placeholder="Benutzername" required></div>
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="deleteProduct" readonly hidden>
+
+                <h1 class="TextMiddle">Produkt löschen</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="Product-Id" required></div>
                 <div class="inputBox"><br><br><br>
                   <input class="button" type="submit" name="" value="Submit">
                 </div>
             </form>
-        </div>
 
-        <div class="product">
-            <form action="AdminB.php" method="POST">
-                <h1 class="TextMiddle">...</h1><br>
-                <div class="FieldMiddle"><input type="text" id="blockUser" name="blockUser" placeholder="Benutzername" required></div>
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="deleteUser" readonly hidden>
+
+                <h1 class="TextMiddle">Benutzer löschen</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
                 <div class="inputBox"><br><br><br>
-                    <input class="button" type="submit" name="" value="Submit">
+                  <input class="button" type="submit" name="" value="Submit">
                 </div>
             </form>
         </div>
 
         <?php 
             include_once("../../../library/php/sqlServer.php");
-
         ?>
     </main>
 

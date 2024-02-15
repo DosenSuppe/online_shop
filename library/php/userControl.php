@@ -36,7 +36,7 @@
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?!*#\´`/%&=}[]{$';
         $charactersLength = strlen($characters);
         $randomString = '';
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
@@ -198,12 +198,17 @@
 
         // gotta check if there is acutally data for the given credentials
         if ($userData == null) return false;
+
+        echo "There is data!<br>";
         
         $storedPassw = $userData["userPassw"];
         $storedSalt = $userData["userSalt"];
         $userId = $userData["userId"];
-
+        echo "Password with Salt: ".$userPassw.$storedSalt."<br>";
+        echo "Password hash: ".$storedPassw."<br>";
+        
         $loginSuccess = password_verify($userPassw.$storedSalt, $storedPassw);
+        echo "Result: ".$loginSuccess."<br>";
 
         if (!$loginSuccess) return false; 
 

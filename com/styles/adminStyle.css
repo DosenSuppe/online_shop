@@ -1,11 +1,32 @@
-.button {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    width: 80%; /* Adjust as needed was 100% */
+.TextMiddle {
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 1px;
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
 }
+.button {
+    display: block;
+    margin: auto;
+    border: 2px solid #3498db;
+    background: #3498db;
+    border-radius: 50px;
+    color: white;
+    width: 150px;
+    height: 37px;
+    font-size: 18px;
+}
+.button:hover {
+    background-color: #3EF591;
+    border: 2px solid #3EF591;
+}
+.FieldMiddle {
+    display: flex;
+    justify-content: center;
+}
+
+
 
 .card { 
     width: 300px;
@@ -16,9 +37,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    height: 500px; /* Set a fixed height for the product container */
+    height: 500px;
 }
-
 .card-display {
     display: inline-flex;
     justify-content: center;
