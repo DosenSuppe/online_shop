@@ -48,14 +48,15 @@
         $hashedPassword = password_hash($password.$passwordSalt, PASSWORD_DEFAULT);
 
         $newUserId = "C" . $userCount + 1;
+        
         // saving the new user to the database
         $creationResponse = sqlExecute("
             INSERT INTO users (userId, name, surname, email, password, birthdate)
-            VALUES ('$newUserId', '$name', '$surname', '$email', '$hashedPassword', 'birhtdate');
+            VALUES ('$newUserId', '$name', '$surname', '$email', '$hashedPassword', '$birthdate');
         ");
 
         // checking user has been created and returning the ID, else return internal error
-        return $creationResponse? $creationResponse : 3;
+        return $creationResponse? $newUserId : 3;
     }
 
     /**

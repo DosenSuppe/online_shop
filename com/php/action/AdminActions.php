@@ -5,7 +5,7 @@
     include_once("../../../library/php/sqlServer.php");
 
     $action = $_POST["action"];
-    $userId = $_POST["userId"];
+    $referralId = $_POST["userId"];
 
     switch ($action) {
         /**
@@ -17,7 +17,7 @@
             sqlExecute("
                 UPDATE users
                 SET isBlocked = 1
-                WHERE userId = '$userId';
+                WHERE userId = '$referralId';
             ");
 
             break;
@@ -32,17 +32,23 @@
             sqlExecute("
                 UPDATE users
                 SET isBlocked = 0
-                WHERE userId = '$userId';
+                WHERE userId = '$referralId';
             ");
 
             break;
 
         case 'deleteUser':
-
+            sqlExecute("
+                DELETE FROM users
+                WHERE userId = '$referralId';
+            ");
             break;
 
         case 'deleteProduct':
-
+            sqlExecute("
+                DELETE FROM products
+                WHERE productId = '$referralId';
+            ");
             break;
             
         default:

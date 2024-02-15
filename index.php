@@ -14,7 +14,18 @@
       <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
     
       <div class="user-account-div">
-        <a class="user-account-display">Gast</a>
+        <a class="user-account-display"><?php 
+          include_once("./library/php/sqlServer.php");
+          include_once("./library/php/userControl.php");
+          $currUser = userGetCurrentUser();
+
+          if ($currUser) {
+            $userName = sqlExecute("SELECT name name FROM users WHERE userId = '$currUser';")->fetch_assoc()["name"];
+            echo $userName;
+          } else {
+            echo "Gast";
+          }
+        ?></a>
       </div>
 
       <br>

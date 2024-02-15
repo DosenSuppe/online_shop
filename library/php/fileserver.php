@@ -1,6 +1,25 @@
 <?php
 
     /**
+     * checkFileLocation
+     * 
+     * returns the directory when found
+     * elsewise it creates and returns it
+     * 
+     * returns null if unable to create
+     * 
+     * input:
+     *      directoryPath    -> string
+     * 
+     * output:
+     *      directoryPath    -> string
+     */
+    function checkDirectory($directoryPath) {
+        // redirecting to the file server
+        return file_exists("../../FileServer/".$directoryPath) ? $directoryPath : mkdir("../../FileServer/".$directoryPath, 0777, true) ? $directoryPath : null;
+    }
+
+    /**
      * saveFileToServer
      *  
      * saves the given file to the file server
@@ -15,7 +34,13 @@
      * 
      */
     function saveFileToServer($productId, $pictureData) {
-        
+        $fileLocation = checkFileLocation($productId);
+
+        $fileCount = array_diff(scandir($path), array('.', '..'))
+        if ($fileLocation != null) {
+            // file already exists!
+            return null;
+        }
     }
 
     /**
@@ -31,7 +56,7 @@
      *      pictureData -> file: string
      *      unable to load -> null
      */
-    function loadFileFromServer($pictureId) {
+    function loadFileFromServer($productId, $pictureId) {
 
     }
 
@@ -49,7 +74,7 @@
      *      success     -> true
      *      failed      -> false
      */
-    function removeFileFromServer($pictureId) {
+    function removeFileFromServer($productId, $pictureId) {
 
     }
 

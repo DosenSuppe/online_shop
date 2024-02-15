@@ -34,7 +34,7 @@
             $commentDate = $comment["commentDate"];
 
             $userId = $comment["userId"];
-            $customerCountry = $comment["customerCountry"];
+            $customerCountry = $comment["customerCountry"]? $comment["customerCountry"] : "null";
 
             echo <<<HTML
                 <div class="comment">
@@ -49,9 +49,9 @@
                     <p class="comment-text">$commentText</p>   
             HTML;
 
-            // checking if the current user is the author
+            // checking if the current user is the author or admin
             // giving them the ability to remove their comments
-            if ($userId == userGetCurrentUser() || userIsAdmin($userId) ) {
+            if ($userId == userGetCurrentUser() || userIsAdmin(userGetCurrentUser()) ) {
                 echo <<<HTML
                     <form action="../action/RemoveComment.php" method="POST" class="removeComment">
                             <input name="productId" type="text" value="$productId" readonly hidden>

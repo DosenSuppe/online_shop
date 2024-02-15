@@ -1,15 +1,30 @@
 <?php
-    if ($_SERVER["REQUEST_METHOD"] != "POST") return;
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        return;
+    }
 
     include_once("../../../library/php/userControl.php");
     include_once("../../../library/php/sqlServer.php");
 
+    // checking if the email is already in use
+    if (isset($_POST["email"])) {
+        $email = $_POST["email"];
+        $emailInUse = sqlExecute("
+            SELECT email FROM users WHERE email = '$email'; 
+        ")->fetch_assoc();
+
+        if ($emailInUse) {
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+    }
+    
+
     // verifying the email verification code
     if (isset($_POST["verificationCodeVerify"])) {
-        
+
         if ($_POST["verificationCodeVerify"] == $_POST["verificationCode"]) {
             // removing the getting the data and removing the verification code from the database
-            
             $verificationCode = $_POST["verificationCode"];
 
             $data = sqlExecute("
@@ -17,7 +32,7 @@
                 FROM verifications 
                 WHERE verificationCode = '$verificationCode';")->fetch_assoc();
 
-            sqlExecute("DELETE FROM verifications WHERE verificationCode = 'verificationCode' ");
+            sqlExecute("DELETE FROM verifications WHERE verificationCode = '$verificationCode' ");
 
             $email = $data["email"];
             $password = $data["password"];
@@ -33,23 +48,23 @@
             // internal server error
             } else if ($userId == 3) {
 
-            // account has been craeted
+            // account has been created
             } else {
-
+                $logSuccess = userSetCurrentUser($userId);
+                if ($logSuccess != true) {
+                    echo "Something went wrong! Error-Code: ".$logSuccess."<br>";
+                    exit();
+                }
             }
 
-            echo $userId;
-            // header("Location: http://localhost/PHP/online_shop/index.php");
+            header("Location: http://localhost/PHP/online_shop/index.php");
             exit();
 
         } else {
             // email failed to be verified
-            echo <<<HTML
-                <script>alert("Invalid Verification code!") </script>
-            HTML;
 
             header('Location: ' . $_SERVER['HTTP_REFERER']);
-            die();
+            exit();
         }
     }
 
@@ -59,9 +74,7 @@
     $birthdate = $_POST["birthdate"];
     $password = $_POST["password"];
     
-    // registering new email
-    $email = $_POST["email"];
-
+    // registering the new email
     $subject = "Registration";
 
     // generate a new verification token
@@ -120,8 +133,9 @@
                 <p>Dear $name,</p>
                 <p>Thank you for registering! To complete your registration, please click the button below to verify your email:</p>
                 <a class="verification-button">Verifcation Code: $verificationCode</a>
-                <p>If you didn't register on our site, you can ignore this email.</p>
-                <p>Best Regards,<br>Your Website Team</p>
+                <p>If you didn't register on our site, you can ignore this email.<br>
+                <p style="color: #ff0000">This verification code expires after 15 minutes!</p></p>
+                <p>Best Regards,<br>Your Useless-Things Team</p>
             </div>
             <br>
             <br>

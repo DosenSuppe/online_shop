@@ -1,8 +1,4 @@
 <?php
-
-    // why the fuck is this not defining the variable?????
-    $user_currentUser = null; 
-
     /**
      * createVerificationToken
      * 
@@ -56,10 +52,34 @@
      *  no user -> null
      */
     function userGetCurrentUser() {
-        if (isset($user_currentUser)) {
-            return $user_currentUser;
-        }
-        return null;
+        $path = realpath("./");
+
+        $modifiedPath = strstr($path, "online_shop", true)."online_shop/src/other/user.dat";
+
+        $fileContents =  file_get_contents($modifiedPath);
+        
+        return $fileContents != false ? $fileContents : null;
+    }
+
+    /**
+     * userSetCurrentUser
+     * 
+     * sets the currently logged-in user
+     * 
+     * inputs:
+     *  userId  -> string
+     * 
+     * outputs:
+     *  stored successfully -> true
+     *  failed so store     -> false
+     */
+    function userSetCurrentUser($userId) {
+        $path = realpath("./");
+        $modifiedPath = strstr($path, "online_shop", true)."online_shop/src/other/user.dat";
+
+        $writeSuccess = file_put_contents($modifiedPath, $userId);
+
+        return $writeSuccess != false ? true : false;
     }
 
     /**
@@ -93,7 +113,7 @@
      * 
      */
     function userIsLoggedIn() {
-        return ($user_currentUser == null) ? false : true;
+        return ($userCurrentUser == null) ? false : true;
     }
 
     /**
@@ -142,8 +162,8 @@
             FROM
                 users
             WHERE 
-            userId = '$userId';
-        ")->fetch_assoc();
+                userId = '$userId';
+        ")->fetch_assoc()["isAdmin"];
 
         return $isAdmin == 1 ? true : false;
     }
