@@ -50,6 +50,38 @@
                 WHERE productId = '$referralId';
             ");
             break;
+
+        case 'setAdmin':
+            sqlExecute("
+                UPDATE users
+                SET isAdmin = 1
+                WHERE userId = '$referralId';
+            ");
+            break;
+
+        case 'removeAdmin':
+            sqlExecute("
+                UPDATE users
+                SET isAdmin = 0
+                WHERE userId = '$referralId';
+            ");
+            break;
+
+        case 'setSupplier':
+            sqlExecute("
+                UPDATE users
+                SET isSupplier = 1
+                WHERE userId = '$referralId';
+            ");
+            break;
+
+        case 'removeSupplier':
+            sqlExecute("
+                UPDATE users
+                SET isSupplier = 0
+                WHERE userId = '$referralId';
+            ");
+            break;
             
         default:
             // something went wrong...

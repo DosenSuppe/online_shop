@@ -9,38 +9,61 @@
     <title>Useless-Things.com</title>
 </head>
 <body>
-    <header>
+<header>
         <div class="container">
             <h1>Willkommen bei</h1>
             <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
             
             <div class="user-account-div">
-                <a class="user-account-display">Gast</a>
-            </div>
+            <a href="./UserSettings.php" class="user-account-display"><?php 
+            include_once("../../../library/php/sqlServer.php");
+            include_once("../../../library/php/userControl.php");
+            $currUser = userGetCurrentUser();
 
-            <br>
+            if ($currUser) {
+                $userName = sqlExecute("SELECT name name FROM users WHERE userId = '$currUser';")->fetch_assoc()["name"];
+                echo $userName;
+            } else {
+                echo "Gast";
+            }
+            ?></a>
+        </div>
 
-            <nav>
-                <ul>
-                <li><div><a href="../../../index.php">Home</a></div></li>
-                <li><div><a href="#">Search</a></div></li>
-                <li><div><a href="#">Contact</a></div></li>
+        <br>
 
-                <!-- giving admin-users access to the admin-panel -->
-                <?php 
-                    include_once("../../../library/php/sqlServer.php");
-                    include_once("../../../library/php/userControl.php");
+        <nav>
+            <ul>
+            <li><div><a href="../../../index.php">Home</a></div></li>
+            <li><div><a href="#">Search</a></div></li>
+            <li><div><a href="#">Contact</a></div></li>
 
-                    if (userIsAdmin(userGetCurrentUser())) {
-                    echo <<<HTML
-                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
-                    HTML;
-                    }
-                ?>
+            <!-- giving suppliers access to the supplier interface -->
+            <?php 
+                include_once("../../../library/php/sqlServer.php");
+                include_once("../../../library/php/userControl.php");
 
-                <li><div><a href="#">Log-In</a></div></li>
-                </ul>
-            </nav>
+                if (userIsSupplier(userGetCurrentUser())) {
+                echo <<<HTML
+                    <li><div><a href="./SupplierInterface.php">Supplies</a></div></li>
+                HTML;
+                }
+            ?>
+            
+            <!-- giving admin-users access to the admin-panel -->
+            <?php 
+                include_once("../../../library/php/sqlServer.php");
+                include_once("../../../library/php/userControl.php");
+
+                if (userIsAdmin(userGetCurrentUser())) {
+                echo <<<HTML
+                    <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                HTML;
+                }
+            ?>
+
+            <li><div><a href="./SignUpLogIn.php">Log-In</a></div></li>
+            </ul>
+        </nav>
         </div>
     </header>
 
@@ -66,7 +89,7 @@
             </form>
         </div>
 
-        <div class="product">
+        <div class="card">
             <form action="../action/AdminActions.php" method="POST">
                 <input name="action" value="deleteProduct" readonly hidden>
 
@@ -87,6 +110,51 @@
                 </div>
             </form>
         </div>
+        
+        <div class="card">
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="setAdmin" readonly hidden>
+
+                <h1 class="TextMiddle">Admin geben</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
+                <div class="inputBox"><br><br><br>
+                  <input class="button" type="submit" name="" value="Submit">
+                </div>
+            </form>
+
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="removeAdmin" readonly hidden>
+
+                <h1 class="TextMiddle">Admin nehmen</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
+                <div class="inputBox"><br><br><br>
+                  <input class="button" type="submit" name="" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="setSupplier" readonly hidden>
+
+                <h1 class="TextMiddle">Verkäufer geben</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
+                <div class="inputBox"><br><br><br>
+                  <input class="button" type="submit" name="" value="Submit">
+                </div>
+            </form>
+
+            <form action="../action/AdminActions.php" method="POST">
+                <input name="action" value="removeSupplier" readonly hidden>
+
+                <h1 class="TextMiddle">Verkäufer nehmen</h1><br>
+                <div class="FieldMiddle"><input type="text" name="referralId" placeholder="User-Id" required></div>
+                <div class="inputBox"><br><br><br>
+                  <input class="button" type="submit" name="" value="Submit">
+                </div>
+            </form>
+        </div>
+
 
         <?php 
             include_once("../../../library/php/sqlServer.php");

@@ -8,38 +8,61 @@
     <title>Useless-Things.com</title>
 </head>
 <body>
-    <header>
+<header>
         <div class="container">
             <h1>Willkommen bei</h1>
             <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
             
             <div class="user-account-div">
-                <a class="user-account-display">Gast</a>
-            </div>
+            <a href="./UserSettings.php" class="user-account-display"><?php 
+            include_once("../../../library/php/sqlServer.php");
+            include_once("../../../library/php/userControl.php");
+            $currUser = userGetCurrentUser();
 
-            <br>
+            if ($currUser) {
+                $userName = sqlExecute("SELECT name name FROM users WHERE userId = '$currUser';")->fetch_assoc()["name"];
+                echo $userName;
+            } else {
+                echo "Gast";
+            }
+            ?></a>
+        </div>
 
-            <nav>
-                <ul>
-                <li><div><a href="../../../index.php">Home</a></div></li>
-                <li><div><a href="#">Search</a></div></li>
-                <li><div><a href="#">Contact</a></div></li>
+        <br>
 
-                <!-- giving admin-users access to the admin-panel -->
-                <?php 
-                    include_once("../../../library/php/sqlServer.php");
-                    include_once("../../../library/php/userControl.php");
+        <nav>
+            <ul>
+            <li><div><a href="../../../index.php">Home</a></div></li>
+            <li><div><a href="#">Search</a></div></li>
+            <li><div><a href="#">Contact</a></div></li>
 
-                    if (userIsAdmin(userGetCurrentUser())) {
-                    echo <<<HTML
-                        <li><div><a href="./AdminInterface.php">Admin</a></div></li>
-                    HTML;
-                    }
-                ?>
+            <!-- giving suppliers access to the supplier interface -->
+            <?php 
+                include_once("../../../library/php/sqlServer.php");
+                include_once("../../../library/php/userControl.php");
 
-                <li><div><a href="#">Log-In</a></div></li>
-                </ul>
-            </nav>
+                if (userIsSupplier(userGetCurrentUser())) {
+                echo <<<HTML
+                    <li><div><a href="./SupplierInterface.php">Supplies</a></div></li>
+                HTML;
+                }
+            ?>
+            
+            <!-- giving admin-users access to the admin-panel -->
+            <?php 
+                include_once("../../../library/php/sqlServer.php");
+                include_once("../../../library/php/userControl.php");
+
+                if (userIsAdmin(userGetCurrentUser())) {
+                echo <<<HTML
+                    <li><div><a href="./AdminInterface.php">Admin</a></div></li>
+                HTML;
+                }
+            ?>
+
+            <li><div><a href="./SignUpLogIn.php">Log-In</a></div></li>
+            </ul>
+        </nav>
         </div>
     </header>
 
@@ -97,9 +120,13 @@
                         <!-- img src="../../../src/img/product.jpg" -->
                         <img src="$productThumbnail">
                     </div>
+                </div>
+                <div class="product-info-insh">
                     <h1>$productName</h1>
                     <img class="country-icon" src="../../../src/img/$supplierCountry.png"> <h4>$supplierName</h4><br>
+                    <a class="product-price"> $productPrice €</a>
                     <a class="product-description">$productDescription</a>
+                    <button onClick="addCart'$productId');" type="button" class="Zum-warenkorb-fuegen">Zum Warenkorb hinzufügen</button>
                 </div>
             HTML;
 
@@ -109,14 +136,14 @@
         ?>
     </main>
 
-    <form action="../action/upload.php" method="post" enctype="multipart/form-data">
+    <!-- <form action="../action/upload.php" method="post" enctype="multipart/form-data">
         <label>Select Image File:</label>
 
         <input type="file" name="image">
         <input type="text" name="productId">
         <input type="text" name="isFront">
         <input type="submit" name="submit" value="Upload">
-    </form>
+    </form> -->
 
     <footer>
         <div class="container">

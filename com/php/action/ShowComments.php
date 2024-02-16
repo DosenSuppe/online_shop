@@ -14,7 +14,8 @@
 
                 u.name customerName,
                 u.surname customerSurname,
-                u.countryOrigin customerCountry
+                u.countryOrigin customerCountry,
+                u.isBlocked isBlocked
 
             FROM
                 users u,
@@ -34,7 +35,7 @@
             $commentDate = $comment["commentDate"];
 
             $userId = $comment["userId"];
-            $customerCountry = $comment["customerCountry"]? $comment["customerCountry"] : "null";
+            $customerCountry = strlen($comment["customerCountry"]) > 3 ? $comment["customerCountry"] : "null";
 
             echo <<<HTML
                 <div class="comment">
@@ -53,18 +54,33 @@
             // giving them the ability to remove their comments
             if ($userId == userGetCurrentUser() || userIsAdmin(userGetCurrentUser()) ) {
                 echo <<<HTML
-                    <form action="../action/RemoveComment.php" method="POST" class="removeComment">
+                        <form action="../action/RemoveComment.php" method="POST" class="removeComment">
                             <input name="productId" type="text" value="$productId" readonly hidden>
                             <input name="userId" type="text" value="$userId" readonly hidden>
                             <input name="timestamp" type="text" value="$commentDate" readonly hidden>
 
                             <input type="submit" value="Kommentar löschen">
                         </form>
-                    </div>
+
                 HTML;
 
-            } else // non-authors cannot remove the comment
-                echo "</div>";
+                if (!$comment["isBlocked"]) {
+                    echo <<<HTML
+                         <form action="../action/EditComment.php" method="POST" class="editComment">
+                            <input name="productId" type="text" value="$productId" readonly hidden>
+                            <input name="userId" type="text" value="$userId" readonly hidden>
+                            <input name="commentCreator" type="text" value="$commentCreator" readonly hidden>
+                            <input name="timestamp" type="text" value="$commentDate" readonly hidden>
+                            <input name="commentText" type="text" value="$commentText" readonly hidden>
+                            <input name="userCountry" type="text" value="$customerCountry" readonly hidden>
+
+                            <input type="submit" value="Bearbeiten">
+                        </form>
+                    HTML;
+                }
+            }
+
+            echo "</div>";
         }
     ?>
 

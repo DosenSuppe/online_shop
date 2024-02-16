@@ -51,8 +51,8 @@
         
         // saving the new user to the database
         $creationResponse = sqlExecute("
-            INSERT INTO users (userId, name, surname, email, password, birthdate)
-            VALUES ('$newUserId', '$name', '$surname', '$email', '$hashedPassword', '$birthdate');
+            INSERT INTO users (userId, name, surname, email, password, birthdate, salt)
+            VALUES ('$newUserId', '$name', '$surname', '$email', '$hashedPassword', '$birthdate', '$passwordSalt');
         ");
 
         // checking user has been created and returning the ID, else return internal error

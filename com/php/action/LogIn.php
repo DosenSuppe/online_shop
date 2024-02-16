@@ -7,6 +7,12 @@
 
     $loginSuccess = userLogin($userEmail, $userPassword);
     
-    echo "Success: ".$loginSuccess;
+    if ($loginSuccess == false) {
+        echo "Invalid Email or Password";
+        exit();
+    } 
 
+    userSetCurrentUser($loginSuccess);
+    header('Location: ' . 'http://localhost/PHP/online_shop/');
+    die();
 ?>

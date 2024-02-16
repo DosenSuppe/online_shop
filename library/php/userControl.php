@@ -62,6 +62,48 @@
     }
 
     /**
+     * addToShoppingCart
+     * 
+     * adds a product to the shoppingcart
+     * 
+     * inputs:
+     *  productId   -> string
+     *  amount      -> number
+     * 
+     * requires:
+     *  library/php/sqlServer.php
+     */
+    function addToShoppingCar($productId, $amount) {
+        $user = userGetCurrentUser();
+
+        sqlExecute("INSERT INTO cart (productId, userId, amount) 
+                    VALUES ('$productId', '$user', '$amount');");
+    }
+
+    /**
+     * removeFromShoppingCart
+     * 
+     * removes a product from the shoppingcart
+     * 
+     * inputs:
+     *  productId   -> string
+     * 
+     * requires:
+     *  library/php/sqlServer.php
+     */
+    function removeFromShoppingCart($productId) {
+        $user = userGetCurrentUser();
+
+        sqlExecute("DELETE 
+                        * 
+                    FROM 
+                        cart 
+                    WHERE 
+                        productId = '$productid' AND
+                        userId = '$user';");
+    }
+
+    /**
      * userSetCurrentUser
      * 
      * sets the currently logged-in user
@@ -132,13 +174,13 @@
     function userIsSupplier($userId) {
         $isSupplier = sqlExecute("
             SELECT 
-                isAdmin isAdmin
+                isSupplier isSupplier
             FROM
                 users
             WHERE 
-            userId = '$userId';
-        ")->fetch_assoc();
-
+                userId = '$userId';
+        ")->fetch_assoc()['isSupplier'];
+        
         return $isSupplier == 0 ? false : true;
     }
 
@@ -198,18 +240,13 @@
 
         // gotta check if there is acutally data for the given credentials
         if ($userData == null) return false;
-
-        echo "There is data!<br>";
         
         $storedPassw = $userData["userPassw"];
         $storedSalt = $userData["userSalt"];
         $userId = $userData["userId"];
-        echo "Password with Salt: ".$userPassw.$storedSalt."<br>";
-        echo "Password hash: ".$storedPassw."<br>";
         
         $loginSuccess = password_verify($userPassw.$storedSalt, $storedPassw);
-        echo "Result: ".$loginSuccess."<br>";
-
+        
         if (!$loginSuccess) return false; 
 
         // checking for a re-hash

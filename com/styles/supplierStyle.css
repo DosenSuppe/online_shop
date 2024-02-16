@@ -1,0 +1,94 @@
+.TextMiddle {
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 1px;
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
+}
+.button {
+    display: block;
+    margin: auto;
+    border: 2px solid #3498db;
+    background: #3498db;
+    border-radius: 50px;
+    color: white;
+    width: 150px;
+    height: 37px;
+    font-size: 18px;
+}
+.button:hover {
+    background-color: #3EF591;
+    border: 2px solid #3EF591;
+}
+.FieldMiddle {
+    display: flex;
+    justify-content: center;
+}
+
+
+.card-position1 {
+    margin-top: 1%;
+    margin-right: 5%;
+
+    /*
+    display: inline-flex;
+
+    flex-grow: 1;
+
+    justify-content: center;
+    align-items: center;
+    */
+}
+.card-position2 {
+    margin-top: 1%;
+    margin-left: 5%;
+}
+.card-position3 {
+    margin-top: 1%;
+}
+.card1 { 
+    width: 400px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+.card2 { 
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+.itemsRow1 {
+    margin: 5%;
+}
+.itemsRow2 {
+    margin: auto;
+}
+.upload {
+    background-color: #3498db;
+}
+.upload:hover {
+    background-color: #3EF591;
+}
+main {
+    flex-grow: 1;
+}
+.test {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.test2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

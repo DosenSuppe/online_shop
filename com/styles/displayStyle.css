@@ -8,7 +8,7 @@
     padding-right: 5px;
     margin-top: -5px;
     padding-top: 5px;
-    height: 550px;
+    height: auto;
 }
 
 .product-display {
@@ -33,8 +33,9 @@
 
 .product-image {
     width: 400px;
-    height: 300px;
+    height: auto;
     overflow: hidden;
+    padding-bottom: 5px;
 }
 
 .product-image img {
@@ -171,4 +172,53 @@
 .submitComment:hover {
     background: #2fbc6a;
     border-radius: 5px;
+}
+
+.product-info-insh {
+    background-color: #3498db4c;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: -5px;
+    padding-top: 5px;
+    height: auto;
+    width: 60%;
+    margin-right: 10%;
+    margin-left: auto;
+}
+
+.Zum-warenkorb-fuegen {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px;
+    margin-top: 5%;
+    margin-left: 75%;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    align-items: center;
+}
+
+/* editing comment */
+.editComment {
+    margin-top: 0px;
+    text-align: right;
+}
+
+.editComment input[type="submit"] {
+    background-color: #00000000;
+    color: #000000;
+    font-size: small;
+    width: auto;
+    border-style: hidden;
+    transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
+}
+
+.editComment input[type="submit"]:hover {
+    background-color: #98c02b9e;
+    border-radius: 5px;
+    color: #000000;
+    font-size: small;
+    width: auto;
 }

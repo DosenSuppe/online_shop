@@ -14,7 +14,7 @@
       <h1>&emsp;&emsp;&emsp;Useless-Things.com</h1>
     
       <div class="user-account-div">
-        <a class="user-account-display"><?php 
+        <a href="./com/php/site/UserSettings.php" class="user-account-display"><?php 
           include_once("./library/php/sqlServer.php");
           include_once("./library/php/userControl.php");
           $currUser = userGetCurrentUser();
