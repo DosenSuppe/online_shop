@@ -79,7 +79,8 @@
                     p.availableCountry productCountry,
 
                     s.name supplierName,
-                    s.countryOrigin supplierCountry
+                    s.countryOrigin supplierCountry,
+                    s.userId userId
             
             FROM 
                 products p, 
@@ -101,6 +102,8 @@
             $productName = $productData["productName"];
             $productDescription = $productData["productDescription"];
             $productPrice = $productData["price"];
+
+            $supplierId = $productData["userId"];
 
             $supplierName = $productData["supplierName"];
             $supplierCountry = $productData["supplierCountry"];
@@ -124,26 +127,28 @@
                 <div class="product-info-insh">
                     <h1>$productName</h1>
                     <img class="country-icon" src="../../../src/img/$supplierCountry.png"> <h4>$supplierName</h4><br>
-                    <a class="product-price"> $productPrice €</a>
+                    <a class="product-price"> $productPrice €</a><br><br>
                     <a class="product-description">$productDescription</a>
                     <button onClick="addCart'$productId');" type="button" class="Zum-warenkorb-fuegen">Zum Warenkorb hinzufügen</button>
-                </div>
             HTML;
 
+            if (userGetCurrentUser() == $supplierId) {
+                echo <<<HTML
+                    <form action="../action/SupplierActions.php" method="POST">
+                        <input type="text" value="$productId" name="id" hidden readonly>
+                        <input type="text" value="deleteProduct" name="action" hidden readonly>
+                        <input type="submit" class="delete" value="Produkt löschen">
+                    </form>
+                HTML;
+            }
+
+            echo "</div>";
             // displaying the product's comments
             include_once("../action/ShowComments.php");
 
         ?>
     </main>
 
-    <!-- <form action="../action/upload.php" method="post" enctype="multipart/form-data">
-        <label>Select Image File:</label>
-
-        <input type="file" name="image">
-        <input type="text" name="productId">
-        <input type="text" name="isFront">
-        <input type="submit" name="submit" value="Upload">
-    </form> -->
 
     <footer>
         <div class="container">

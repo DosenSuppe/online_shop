@@ -70,16 +70,17 @@
     <main>
         <div class="test">
             <div class="card1 card-position1">
-                    <form action="../action/SupplierActions.php" method="POST">
+                    <form action="../action/SupplierActions.php" method="POST" enctype="multipart/form-data">
                         <input name="action" value="addProduct" readonly hidden>
 
                         <h1 class="TextMiddle">Produkt erstellen</h1><br>
                         <div class="FieldMiddle">
-                            <input class="itemsRow1" type="text" name="productId" placeholder="Produkt-ID" required>
+                            <input class="itemsRow1" type="text" name="productName" placeholder="Produktname" required>
                             <input class="itemsRow1" type="text" name="price" placeholder="Preis" required>
                         </div>
                         <div class="FieldMiddle">
-                            <input class="itemsRow2" type="text" name="productName" placeholder="Produkt-Name" required>
+                            <input class="itemsRow2" type="text" name="productDesc" placeholder="Produktbeschreibung" required>
+                            <input type="file" name="image" required>
                             <input class="upload itemsRow2" type="submit" name="" value="Submit">
                         </div>
                         <div class="inputBox"><br><br>
@@ -125,7 +126,7 @@
                                 </div>
                                 <div class="FieldMiddle">
                                     <p class="itemsRow2">$productIdWithMostPurchases</p>
-                                    <p class="itemsRow2">$income</p>
+                                    <p class="itemsRow2">$income €</p>
                                     <p class="itemsRow2">$purchases</p>
                                 </div>
                             </form>

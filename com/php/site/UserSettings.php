@@ -66,9 +66,9 @@
         </div>
     </header>
 
-    <main>
+    <main class="container" id="product-container">
     
-        <section id="holder" class="product">
+        <section class="product">
         <?php 
         include_once("../../../library/php/sqlServer.php");
         include_once("../../../library/php/userControl.php");
@@ -92,7 +92,7 @@
         $saleMail = $userData["saleMail"];
 
         echo <<<HTML
-                <form action="../action/updateUserSettings.php" method="POST">
+                <form action="../action/updateUserSettings.php" method="POST" class="product-info">
                     <a>Vorname: </a>
                     <input type="text" name="name" value="$name"><br>
                     <a>Nachname: </a>
@@ -114,7 +114,7 @@
         }
 
         echo <<<HTML
-                    <label for="saleMail">Mitteilungen bei Rabatten</label><br><br>
+                    <label for="saleMail">Bekomme E-Mail mitteilungen bei Rabatten</label><br><br>
 
                     <input type="submit" value="Speichern">
 
@@ -124,8 +124,17 @@
         ?>
         </section>
         <section class="product">
-            <label>Hallo</label>
-        </section>
+            <div class="product-info">
+            <?php
+            $products = sqlLoadData("SELECT a.productName productName FROM products as a , cart as b WHERE a.productId = b.productId;")->fetch_assoc()["productName"];
+                echo <<<HTML
+                    <tr>
+                        <td>$products</td>
+                    </tr>;
+                HTML;
+            ?>
+            </div>
+    </section>
     </main>
 
 

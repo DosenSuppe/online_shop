@@ -163,6 +163,27 @@
     width: auto;
 }
 
+/* removing product */
+.delete {
+    background-color: #00000000;
+    color: #000000;
+    font-size: small;
+    width: auto;
+    padding: 10px;
+    margin-top: 2%;
+    margin-left: 85%;
+    border-style: hidden;
+    transition: background-color 0.3s ease, border-radius 0.3s ease, color 0.3s ease;
+}
+
+.delete:hover {
+    background-color: #c02b2b9e;
+    border-radius: 5px;
+    color: #000000;
+    font-size: small;
+    width: auto;
+}
+
 .submitComment {
     background: #36d678;
     border-radius: 5px;

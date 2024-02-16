@@ -18,8 +18,8 @@
     font-size: 18px;
 }
 .button:hover {
-    background-color: #3EF591;
-    border: 2px solid #3EF591;
+    background-color: #1a4d6e;
+    border: 2px solid #1a4d6e;
 }
 .FieldMiddle {
     display: flex;
